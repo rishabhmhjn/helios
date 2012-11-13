@@ -1,3 +1,21 @@
+<<<<<<< .mine
+/**
+ * @author rishabhmhjn
+ *
+ *
+ */
+
+
+
+
+
+
+
+
+
+
+
+=======
 /**
  * @author rishabhmhjn
  */
@@ -14,4 +32,5 @@ logger.debug(doc);
 
 doc.clear();
 
+>>>>>>> .theirs
 logger.debug(doc);
