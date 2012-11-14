@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "gitolite@rishabhmhjn.me:nodejs-solr-client"
+    "url": "https://github.com/rishabhmhjn/nodejs-solr-client"
   },
   "keywords": [
     "nodejs",
