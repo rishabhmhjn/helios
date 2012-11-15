@@ -14,9 +14,9 @@ exports.clientInit = function(test) {
       .doesNotThrow(
           function() {
             new solrClient({
-              host : 1111,
-              path : 1111,
-              port : 11
+              host : "127.0.0.1",
+              path : "/solr",
+              port : 8983
             });
           },
           "",
@@ -39,24 +39,43 @@ exports.clientInit = function(test) {
 };
 
 exports.clientExecute = {
-  "NG" : function(test) {
+  "NG for bad server" : function(test) {
     var solr_client = new solrClient();
 
-    solr_client.req(function(err, res) {
+    solr_client.select("q=movie_name:winnie", function(err, res) {
       test.notEqual(err, null, "This request should fail!");
       test.done();
     });
   },
 
-  "OK" : function(test) {
+  "OK for query object" : function(test) {
     var solr_client = new solrClient({
-      host : 'YOUR_HOST_HERE', // Insert your client host
-      port : 80,
-      path : '/', // Insert your client solr path
-      method : 'GET'
+      host : 'localhost', // Insert your client host
+      port : 8983,
+      path : '/solr', // Insert your client solr path
+      method : 'POST'
     });
 
-    solr_client.req(function(err, res) {
+    solr_client.select({
+      q : "field_name:keyword"
+    }, function(err, res) {
+      // logger.debug(res);
+      test.strictEqual(err, null);
+      test.done();
+    });
+
+  },
+
+  "OK for query string" : function(test) {
+    var solr_client = new solrClient({
+      host : 'localhost', // Insert your client host
+      port : 8983,
+      path : '/solr', // Insert your client solr path
+      method : 'POST'
+    });
+
+    solr_client.select('q=field_name:keyword', function(err, res) {
+      // logger.debug(res);
       test.strictEqual(err, null);
       test.done();
     });
