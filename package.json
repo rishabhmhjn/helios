@@ -21,7 +21,6 @@
   },
   "devDependencies" : {
     "nodeunit" : "*",
-    "nlogger" : "*",
-    "libxmljs" : "*"
+    "nlogger" : "*"
   }
 }
