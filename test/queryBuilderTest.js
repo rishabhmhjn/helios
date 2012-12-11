@@ -2,7 +2,8 @@
  * @author rishabhmhjn
  */
 
-var helios = require("../"), logger = require('nlogger').logger(module);
+var helios = require("../"), querystring = require('querystring'), logger = require(
+    'nlogger').logger(module);
 
 exports.init = function(test) {
   var qb = new helios.queryBuilder();
