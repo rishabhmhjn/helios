@@ -82,7 +82,7 @@ exports.clientExecute = {
       op : 'OR',
       df : 'field_name',
       keywords : 'keyword'
-    }).toString(), function(err, res) {
+    }), function(err, res) {
       // logger.debug(res);
       test.strictEqual(err, null);
       test.done();
