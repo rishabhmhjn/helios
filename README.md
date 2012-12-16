@@ -144,7 +144,7 @@ var solr_doc = new helios.document();
 #### getBoost()
 This returns the `document`'s boost
 
-#### setBoost(boost)
+#### setBoost
 This sets the `document`'s boost to a given `float`
 ```js
 solr_doc.setBoost(2.112);
@@ -173,7 +173,7 @@ solr_doc.getField('field_name');
 ```
 
 
-#### setField(field_name, value, boost)
+#### setField
 This methods adds `field_name` whose value is `value` and boost is `boost`.
 ```js
 solr_doc.setField('field_name1', 'value1', 1.2.21);
@@ -208,7 +208,7 @@ solr_doc.toXML();
 
 Issues
 ======
-I know there are a lot of pending tasks and modifications required needed in this library.
+I know there are a lot of pending tasks and modifications required in this library.
 If you find any bug or a feature that you want,
 please submit an [issue](https://github.com/rishabhmhjn/helios/issues).
 I will respond to it as soon as I can and make required changes to it.
