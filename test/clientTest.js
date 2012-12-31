@@ -1,10 +1,17 @@
 /**
+ * clientTest is incomplete! do not trust it!
+ * 
+ * @TODO need to complete these tests
  * @author rishabhmhjn
  */
+
+// set this flag to false if you have your solr settings correct
+var skip = true;
 
 var helios = require("../"), logger = require('nlogger').logger(module);
 
 exports.clientInit = function(test) {
+  if (skip) return test.done();
 
   test.expect(3);
 
@@ -40,6 +47,8 @@ exports.clientInit = function(test) {
 
 exports.clientExecute = {
   "NG for bad server" : function(test) {
+    if (skip) return test.done();
+
     var solr_client = new helios.client();
 
     solr_client.select("q=field_name:value", function(err, res) {
@@ -49,6 +58,8 @@ exports.clientExecute = {
   },
 
   "OK for query as an object" : function(test) {
+    if (skip) return test.done();
+
     var solr_client = new helios.client({
       host : 'localhost', // Insert your client host
       port : 8983,
@@ -58,10 +69,9 @@ exports.clientExecute = {
     solr_client
         .select(
             {
-              q : "movie_desc:move"
+              q : "field_name:keyword"
             },
             function(err, res) {
-              // logger.debug(res);
               test
                   .strictEqual(err, null,
                       "There should be no error if the server details and query is correct");
@@ -70,6 +80,8 @@ exports.clientExecute = {
   },
 
   "OK for query as a string" : function(test) {
+    if (skip) return test.done();
+
     var solr_client = new helios.client({
       host : 'localhost', // Insert your client host
       port : 8983,
@@ -91,6 +103,8 @@ exports.clientExecute = {
   },
 
   "Facet Query Test" : function(test) {
+    if (skip) return test.done();
+
     var solr_client = new helios.client({
       host : 'localhost', // Insert your client host
       port : 8983,
@@ -113,6 +127,8 @@ exports.clientExecute = {
 
   "Document Add" : {
     "Add" : function(test) {
+      if (skip) return test.done();
+
       var solrdoc = new helios.document();
       solrdoc.addField('field_name', 'value');
 

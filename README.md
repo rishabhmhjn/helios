@@ -1,4 +1,4 @@
-helios - a nodejs-solr client
+helios - a nodejs-solr client [![Build Status](https://travis-ci.org/rishabhmhjn/helios.png)](https://travis-ci.org/rishabhmhjn/helios)
 =============================
 Well, this is a little neater version of the already available nodejs-solr clients.
 I figured out that a lot of problems lies in creating queries and documents. 
@@ -99,9 +99,9 @@ You can also pass a `proxy : { host : "proxy_host", port : 55 }` in the `options
 ### methods
 
 #### solr_client.select
-It accepts two arguments:
-- query string OR query object OR an instance of `helios.queryBuilder`
-- callback (err, res)
+It accepts two arguments:  
+- query string OR query object OR an instance of `helios.queryBuilder`  
+- callback (err, res)  
 
 ```js
 solr_client.select({
@@ -115,7 +115,7 @@ solr_client.select({
 });
 ```
 
-#### solr_client.addDoc(helios.document, function(err))
+#### solr_client.addDoc
 It accepts 3 arguments:  
 - `solrdoc` : an instance of [helios.document](#document)  
 - `commit_flag` : `boolean`  
@@ -176,7 +176,7 @@ solr_doc.getField('field_name');
 #### setField
 This methods adds `field_name` whose value is `value` and boost is `boost`.
 ```js
-solr_doc.setField('field_name1', 'value1', 1.2.21);
+solr_doc.setField('field_name1', 'value1', 1.21);
 solr_doc.setField('field_name2', 2121);
 ```
 
@@ -208,7 +208,7 @@ solr_doc.toXML();
 
 Issues
 ======
-I know there are a lot of pending tasks and modifications required in this library.
-If you find any bug or a feature that you want,
-please submit an [issue](https://github.com/rishabhmhjn/helios/issues).
+I know there are a lot of pending tasks and modifications required in this library.  
+If you find any bug or a feature that you want,  
+please submit an [issue](https://github.com/rishabhmhjn/helios/issues).  
 I will respond to it as soon as I can and make required changes to it.
