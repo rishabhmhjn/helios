@@ -131,7 +131,40 @@ solr_client.addDoc(solrdoc, true, function(err) {
 });
 ```
 
-#### solr_client.deleteDoc
+#### solr_client.updateDoc - For Solr 4.x
+It accepts 3 arguments:  
+- `solrdoc` : an instance of [helios.document](#document)  
+- `commit_flag` : `boolean`  
+- `callback(err)` : a callback which is given an error message upon failure  
+
+NOTES: Use 'set' when you want to update a field value and use 'add' for add a value to multivalue fields. 
+
+```js
+var solrdoc = new helios.document();
+// update the field_name2
+solrdoc.setField('field_name2', 'value1updated', null, 'set');
+// add the field_name3
+solrdoc.setField('field_name3', 'value3', null, 'add');
+// add the field_name4 with boost=1
+solrdoc.setField('field_name4', 'value4', 1 /*boost*/, 'set');
+
+solr_client.updateDoc(solrdoc, true, function(err) {
+  if (err) console.log(err);
+});
+```
+
+```js
+var solrdoc = new helios.document();
+// delete the field_name4
+doc.setFieldDelete('field_name4');
+
+solr_client.updateDoc(solrdoc, true, function(err) {
+  if (err) console.log(err);
+});
+```
+
+
+#### solr_client.deleteDoc - For Solr 4.x
 It accepts 4 arguments:  
 - `id` : The Solr document id. This is defined in the schema.
 - `values` : The list of documents to delete. This could be a string or an array of strings. 
@@ -147,12 +180,12 @@ solr_client.deleteDoc('id', '1' true, function(err) {
 });
 
 // delete the documents with id=2, id=3 and id=4
-solr_client.deleteDoc('id', ['2', '3', '4'] true, function(err) {
+solr_client.deleteDoc('id', ['2', '3', '4'], true, function(err) {
   if (err) console.log(err);
 });
 ```
 
-#### solr_client.deleteDocByQuery
+#### solr_client.deleteDocByQuery - For Solr 4.x
 It accepts 4 arguments:  
 - `query` : The "deleteDocByQuery" uses the Lucene query parser by default. Please refer to Solr documentation for more details.
 - `commit_flag` : `boolean`
@@ -171,7 +204,7 @@ solr_client.deleteDocByQuery('name:Peter', commit, 18, function(err) {
   }
 });
 
-// delete all the documents where name = 'Peter'
+// delete ALL the documents where name = 'Peter' (Be careful when setting maxAffected to 0, you could delete your whole database when query=*:*)
 solr_client.deleteDocByQuery('name:Peter', commit, 0, function(err) {
   if(err) {
     console.log('error: ', err);
