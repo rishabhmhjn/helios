@@ -151,6 +151,27 @@ solrdoc.setField('field_name4', 'value4', 1 /*boost*/, 'set');
 solr_client.updateDoc(solrdoc, true, function(err) {
   if (err) console.log(err);
 });
+
+Or equivalent:
+
+var solrdoc = new helios.document();
+// update the field_name2
+solrdoc.setField('field_name2', 'value1updated');
+// add the field_name3
+solrdoc.setField('field_name3', 'value3');
+// add the field_name4 with boost=1
+solrdoc.setField('field_name4', 'value4');
+
+// setting the updates and boost
+doc.setFieldUpdate('field_name2', 'set');
+doc.setFieldUpdate('field_name3', 'add');
+doc.setFieldUpdate('field_name4', 'set');
+doc.setFieldBoost('field_name4', 1);
+
+
+solr_client.updateDoc(solrdoc, true, function(err) {
+  if (err) console.log(err);
+});
 ```
 
 ```js
