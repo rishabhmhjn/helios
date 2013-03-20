@@ -1,6 +1,6 @@
 {
   "name" : "helios",
-  "version" : "0.0.3",
+  "version" : "0.0.4",
   "description" : "SOLR client for Nodejs",
   "main" : "index.js",
   "scripts" : {

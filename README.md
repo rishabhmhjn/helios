@@ -135,6 +135,109 @@ solr_client.addDoc(solrdoc, true, function(err) {
 });
 ```
 
+#### solr_client.updateDoc - For Solr 4.x
+It accepts 3 arguments:  
+- `solrdoc` : an instance of [helios.document](#document)  
+- `commit_flag` : `boolean`  
+- `callback(err)` : a callback which is given an error message upon failure  
+
+NOTES: Use 'set' when you want to update a field value and use 'add' for add a value to multivalue fields. 
+
+```js
+var solrdoc = new helios.document();
+// update the field_name2
+solrdoc.setField('field_name2', 'value1updated', null, 'set');
+// add the field_name3
+solrdoc.setField('field_name3', 'value3', null, 'add');
+// add the field_name4 with boost=1
+solrdoc.setField('field_name4', 'value4', 1 /*boost*/, 'set');
+
+solr_client.updateDoc(solrdoc, true, function(err) {
+  if (err) console.log(err);
+});
+
+Or equivalent:
+
+var solrdoc = new helios.document();
+// update the field_name2
+solrdoc.setField('field_name2', 'value1updated');
+// add the field_name3
+solrdoc.setField('field_name3', 'value3');
+// add the field_name4 with boost=1
+solrdoc.setField('field_name4', 'value4');
+
+// setting the updates and boost
+doc.setFieldUpdate('field_name2', 'set');
+doc.setFieldUpdate('field_name3', 'add');
+doc.setFieldUpdate('field_name4', 'set');
+doc.setFieldBoost('field_name4', 1);
+
+solr_client.updateDoc(solrdoc, true, function(err) {
+  if (err) console.log(err);
+});
+```
+
+```js
+var solrdoc = new helios.document();
+// delete the field_name4
+doc.setFieldDelete('field_name4');
+
+solr_client.updateDoc(solrdoc, true, function(err) {
+  if (err) console.log(err);
+});
+```
+
+
+#### solr_client.deleteDoc - For Solr 4.x
+It accepts 4 arguments:  
+- `id` : The Solr document id. This is defined in the schema.
+- `values` : The list of documents to delete. This could be a string or an array of strings. 
+- `commit_flag` : `boolean`
+- `callback(err)` : a callback which is given an error message upon failure  
+
+```js
+var solrdoc = new helios.document();
+
+// delete the document with id=1
+solr_client.deleteDoc('id', '1' true, function(err) {
+  if (err) console.log(err);
+});
+
+// delete the documents with id=2, id=3 and id=4
+solr_client.deleteDoc('id', ['2', '3', '4'], true, function(err) {
+  if (err) console.log(err);
+});
+```
+
+#### solr_client.deleteDocByQuery - For Solr 4.x
+It accepts 4 arguments:  
+- `query` : The "deleteDocByQuery" uses the Lucene query parser by default. Please refer to Solr documentation for more details.
+- `commit_flag` : `boolean`
+- `maxAffected` : Before to delete the docs deleteDocByQuery will check how many docs will be deleted. If this is greather than the the maxAffected value the method will stop. Set this value to 0 if you want to delete all the docs affected by the query.
+- `callback(err)` : a callback which is given an error message upon failure  
+
+```js
+var solrdoc = new helios.document();
+
+// delete all the documents where name = 'Peter' and cancel the delete if there are are more than 18 documents.
+solr_client.deleteDocByQuery('name:Peter', commit, 18, function(err) {
+  if(err) {
+    console.log('error: ', err);
+  } else {
+    console.log('Documents deleted!');
+  }
+});
+
+// delete ALL the documents where name = 'Peter' (Be careful when setting maxAffected to 0, you could delete your whole database when query=*:*)
+solr_client.deleteDocByQuery('name:Peter', commit, 0, function(err) {
+  if(err) {
+    console.log('error: ', err);
+  } else {
+    console.log('Documents deleted!');
+  }
+});
+```
+
 <a name="document" />
 ## helios.document
 This class will ease the steps required to make a document to be added to solr.
@@ -199,6 +302,39 @@ solr_doc.setFieldBoost('field_name', 2.121);
 
 #### getFieldBoosts
 Returns a key-value object of all the fields and their boosts
+
+
+#### getFieldUpdate - For Solr 4.x
+This method returns the update type ('set' or 'add') of `field_name`
+```js
+solr_doc.getFieldUpdate("field_name");
+```
+
+#### setFieldUpdate - For Solr 4.x
+This method sets the update type ('set' or 'add') for field name `field_name`
+```js
+solr_doc.setFieldUpdate('field_name', 'set');
+```
+
+#### getFieldUpdates - For Solr 4.x
+Returns a key-value object of all the fields and their update types
+
+
+#### getFieldDelete - For Solr 4.x
+This method returns the delete setup for a `field_name`
+```js
+solr_doc.getFieldDelete("field_name");
+```
+
+#### setFieldDelete - For Solr 4.x
+This method sets the field name `field_name` to delete from the Solr doc
+```js
+solr_doc.setFieldDelete('field_name');
+```
+
+#### getFieldDeletes - For Solr 4.x
+Returns a key-value object of all the fields to delete from the Solr doc
+
 
 #### clear
 This clears the all the `fields`, `fieldBoosts` as well as the `documentBoost`
