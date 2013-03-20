@@ -131,6 +131,56 @@ solr_client.addDoc(solrdoc, true, function(err) {
 });
 ```
 
+#### solr_client.deleteDoc
+It accepts 4 arguments:  
+- `id` : The Solr document id. This is defined in the schema.
+- `values` : The list of documents to delete. This could be a string or an array of strings. 
+- `commit_flag` : `boolean`
+- `callback(err)` : a callback which is given an error message upon failure  
+
+```js
+var solrdoc = new helios.document();
+
+// delete the document with id=1
+solr_client.deleteDoc('id', '1' true, function(err) {
+  if (err) console.log(err);
+});
+
+// delete the documents with id=2, id=3 and id=4
+solr_client.deleteDoc('id', ['2', '3', '4'] true, function(err) {
+  if (err) console.log(err);
+});
+```
+
+#### solr_client.deleteDocByQuery
+It accepts 4 arguments:  
+- `query` : The "deleteDocByQuery" uses the Lucene query parser by default. Please refer to Solr documentation for more details.
+- `commit_flag` : `boolean`
+- `maxAffected` : Before to delete the docs deleteDocByQuery will check how many docs will be deleted. If this is greather than the the maxAffected value the method will stop. Set this value to 0 if you want to delete all the docs affected by the query.
+- `callback(err)` : a callback which is given an error message upon failure  
+
+```js
+var solrdoc = new helios.document();
+
+// delete all the documents where name = 'Peter' and cancel the delete if there are are more than 18 documents.
+solr_client.deleteDocByQuery('name:Peter', commit, 18, function(err) {
+  if(err) {
+    console.log('error: ', err);
+  } else {
+    console.log('Documents deleted!');
+  }
+});
+
+// delete all the documents where name = 'Peter'
+solr_client.deleteDocByQuery('name:Peter', commit, 0, function(err) {
+  if(err) {
+    console.log('error: ', err);
+  } else {
+    console.log('Documents deleted!');
+  }
+});
+```
+
 <a name="document" />
 ## helios.document
 This class will ease the steps required to make a document to be added to solr.
