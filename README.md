@@ -6,8 +6,7 @@ The powerful thing of this library would be the `queryBuilder` & `document` clas
 
 Download
 -------
-Releases are available for download from
-[GitHub](https://github.com/rishabhmhjn/helios/).
+Releases are available for download from [GitHub](https://github.com/rishabhmhjn/helios/).
 Alternatively, you can install using Node Package Manager (npm) as [helios](https://npmjs.org/package/helios):
 
     npm install helios
@@ -82,7 +81,7 @@ It just returns the query you have made as a `string`
 <a name="client" />
 ## helios.client
 ### init
-It can be initialized by passing an `options` object or just by `helios.client()`.
+It can be initialized by `helios.client()` or by passing an `options` Object as an argument like `helios.client(options)`.
 ```js
 try {
   var solr_client = new helios.client({
@@ -94,8 +93,12 @@ catch (e) {
   console.log(e);
 }
 ```
-`options` can have host, port & path.
-You can also pass a `proxy : { host : "proxy_host", port : 55 }` in the `options`.
+`options` can have
+- `host`
+- `port`
+- `path`
+- `proxy : { host : "proxy_host", port : 55 }`
+- `timeout : 10000` in milliseconds
 
 ### methods
 
@@ -213,3 +216,7 @@ I know there are a lot of pending tasks and modifications required in this libra
 If you find any bug or a feature that you want,
 please submit an [issue](https://github.com/rishabhmhjn/helios/issues).
 I will respond to it as soon as I can and make required changes to it.
+
+If you like this module, please do star it :)
+
+    npm star helios

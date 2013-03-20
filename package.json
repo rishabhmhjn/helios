@@ -1,20 +1,24 @@
 {
-  "name": "helios",
-  "version": "0.0.2",
-  "description": "Nodejs client for SOLR",
-  "main": "index.js",
-  "scripts": {
-    "test": "node --expose_gc ./node_modules/nodeunit/bin/nodeunit test"
+  "name" : "helios",
+  "version" : "0.0.3",
+  "description" : "SOLR client for Nodejs",
+  "main" : "index.js",
+  "scripts" : {
+    "test" : "node --expose_gc ./node_modules/nodeunit/bin/nodeunit test"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rishabhmhjn/helios"
+  "bugs" : {
+    "url" : "https://github.com/rishabhmhjn/helios/issues",
+    "email" : "rishabhmhjn@gmail.com"
   },
-  "keywords": [
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/rishabhmhjn/helios"
+  },
+  "keywords" : [
     "solr"
   ],
-  "author": "Rishabh Mahajan",
-  "license": "BSD",
+  "author" : "Rishabh Mahajan",
+  "license" : "BSD",
   "dependencies" : {
     "underscore" : "*"
   },
