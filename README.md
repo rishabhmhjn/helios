@@ -168,7 +168,6 @@ doc.setFieldUpdate('field_name3', 'add');
 doc.setFieldUpdate('field_name4', 'set');
 doc.setFieldBoost('field_name4', 1);
 
-
 solr_client.updateDoc(solrdoc, true, function(err) {
   if (err) console.log(err);
 });
@@ -299,6 +298,39 @@ solr_doc.setFieldBoost('field_name', 2.121);
 
 #### getFieldBoosts
 Returns a key-value object of all the fields and their boosts
+
+
+#### getFieldUpdate - For Solr 4.x
+This method returns the update type ('set' or 'add') of `field_name`
+```js
+solr_doc.getFieldUpdate("field_name");
+```
+
+#### setFieldUpdate - For Solr 4.x
+This method sets the update type ('set' or 'add') for field name `field_name`
+```js
+solr_doc.setFieldUpdate('field_name', 'set');
+```
+
+#### getFieldUpdates - For Solr 4.x
+Returns a key-value object of all the fields and their update types
+
+
+#### getFieldDelete - For Solr 4.x
+This method returns the delete setup for a `field_name`
+```js
+solr_doc.getFieldDelete("field_name");
+```
+
+#### setFieldDelete - For Solr 4.x
+This method sets the field name `field_name` to delete from the Solr doc
+```js
+solr_doc.setFieldDelete('field_name');
+```
+
+#### getFieldDeletes - For Solr 4.x
+Returns a key-value object of all the fields to delete from the Solr doc
+
 
 #### clear
 This clears the all the `fields`, `fieldBoosts` as well as the `documentBoost`
